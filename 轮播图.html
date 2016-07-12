@@ -1,0 +1,141 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="">
+	*{
+	 margin: 0;
+	 padding: 0;
+	}
+	ul{
+		list-style: none;
+	}
+	#container{
+		width: 680px;
+		height: 344px;
+		background: #ccc;
+		margin: 50px auto;
+		position: relative;
+	}
+	#tab{
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+	}
+	#tab li{
+		float: left;
+		display: block;
+		width: 20px;
+		height: 20px;
+		background: #000;
+		color: #fff;
+		text-align: center;
+		line-height: 20px;
+		margin-right: 5px;
+		cursor: pointer;
+	}
+	#imgs img{
+		display: none;
+	}
+	#imgs .selected{
+		display: block;
+	}
+	#tab .selected{
+		background: orange;
+	}
+	#arrow{
+		position: absolute;
+		bottom: 10px;
+		left: 15px;
+	}
+	#arrow span{
+		float: left;
+		width: 20px;
+		height: 20px;
+		background: #000;
+		color: #fff;
+		text-align: center;
+		line-height: 20px;
+		margin-right: 5px;
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<ul id="tab">
+			<li class="selected">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<div id="imgs">
+			<img  class="selected"src="1.jpg">
+			<img src="2.jpg">
+			<img src="3.jpg">
+			<img src="4.jpg">
+		</div>
+		<div id="arrow">
+			<span id="prev">&lt;</span>
+			<span id="next">&gt;</span>
+		</div>
+	</div>
+<script type="text/javascript">
+var oContainer=document.getElementById('container');
+var oTab=document.getElementById('tab');
+var aLi=document.getElementsByTagName('li');
+var oImgs=document.getElementById('imgs');
+var aImgs=document.getElementsByTagName('img');
+var index=0;
+for(var i=0;i<aLi.length;i++){
+	aLi[i].index=i;
+	aLi[i].onmouseover=function(){
+		// index=this.index;
+		changeImg(this.index)
+	}
+}
+function changeImg(idx){
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].className=''
+		aImgs[i].className=''
+	}
+	aLi[idx].className='selected';
+	aImgs[idx].className='selected';
+}
+
+var oprev=document.getElementById('prev');
+var onext=document.getElementById('next');
+onext.onclick=oprev.onclick=function(){
+	if(this==oprev){
+		index--;
+		if(index==-1){
+			index=aLi.length-1
+		}
+	}
+	else{
+		index++;
+		if (index==aLi.length) {
+			index=0;
+		};
+		
+	}
+		changeImg(index);
+
+}
+var timer;
+function play(){
+timer=setInterval(function(){
+	onext.onclick();
+},1000);
+}
+play();
+oContainer.onmouseover=function(){
+	clearInterval(timer)
+}
+oContainer.onmouseout=function(){
+	play();
+}
+
+</script>
+</body>
+</html>
