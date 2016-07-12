@@ -1,11 +1,11 @@
 <!doctype html>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>cal</title>
 	<style type="">
 	*{
-	 margin: 0;
-	 padding: 0;
+		margin: 0;
+		padding: 0;
 	}
 	ul{
 		list-style: none;
@@ -81,60 +81,60 @@
 		</div>
 	</div>
 <script type="text/javascript">
-var oContainer=document.getElementById('container');
-var oTab=document.getElementById('tab');
-var aLi=document.getElementsByTagName('li');
-var oImgs=document.getElementById('imgs');
-var aImgs=document.getElementsByTagName('img');
-var index=0;
-for(var i=0;i<aLi.length;i++){
-	aLi[i].index=i;
-	aLi[i].onmouseover=function(){
-		// index=this.index;
-		changeImg(this.index)
-	}
-}
-function changeImg(idx){
+	var oContainer=document.getElementById('container');
+	var oTab=document.getElementById('tab');
+	var aLi=document.getElementsByTagName('li');
+	var oImgs=document.getElementById('imgs');
+	var aImgs=document.getElementsByTagName('img');
+	var index=0;
 	for(var i=0;i<aLi.length;i++){
-		aLi[i].className=''
-		aImgs[i].className=''
-	}
-	aLi[idx].className='selected';
-	aImgs[idx].className='selected';
-}
-
-var oprev=document.getElementById('prev');
-var onext=document.getElementById('next');
-onext.onclick=oprev.onclick=function(){
-	if(this==oprev){
-		index--;
-		if(index==-1){
-			index=aLi.length-1
+		aLi[i].index=i;
+		aLi[i].onmouseover=function(){
+			// index=this.index;
+			changeImg(this.index);
 		}
 	}
-	else{
-		index++;
-		if (index==aLi.length) {
-			index=0;
-		};
-		
+	function changeImg(idx){
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].className=''
+			aImgs[i].className=''
+		}
+		aLi[idx].className='selected';
+		aImgs[idx].className='selected';
 	}
-		changeImg(index);
 
-}
-var timer;
-function play(){
-timer=setInterval(function(){
-	onext.onclick();
-},1000);
-}
-play();
-oContainer.onmouseover=function(){
-	clearInterval(timer)
-}
-oContainer.onmouseout=function(){
+	var oprev=document.getElementById('prev');
+	var onext=document.getElementById('next');
+	onext.onclick=oprev.onclick=function(){
+		if(this==oprev){
+			index--;
+			if(index==-1){
+				index=aLi.length-1
+			}
+		}
+		else{
+			index++;
+			if (index==aLi.length) {
+				index=0;
+			};
+			
+		}
+			changeImg(index);
+
+	}
+	var timer;
+	function play(){
+	timer=setInterval(function(){
+		onext.onclick();
+	},1000);
+	}
 	play();
-}
+	oContainer.onmouseover=function(){
+		clearInterval(timer);
+	}
+	oContainer.onmouseout=function(){
+		play();
+	}
 
 </script>
 </body>
